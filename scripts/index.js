@@ -1,8 +1,3 @@
-let player = {
-    name: "Per",
-    chips: 200
-}
-
 let cards = []
 let sum = 0
 let hasBlackJack = false
@@ -12,6 +7,9 @@ let messageEl = document.getElementById("message-el")
 let sumEl = document.getElementById("sum-el")
 let cardsEl = document.getElementById("cards-el")
 let playerEl = document.getElementById("player-el")
+let chipsEl = document.getElementById("chips-el")
+chips = 100
+chipsEl.textContent = "Chips: $" + chips
 
 playerEl.textContent = player.name + ": $" + player.chips
 
@@ -43,15 +41,18 @@ function renderGame() {
     
     sumEl.textContent = "Sum: " + sum
     if (sum <= 20) {
-        message = "Do you want to draw a new card?"
+        message = "Draw a new card?"
     } else if (sum === 21) {
-        message = "You've got Blackjack!"
+        message = "Blackjack!"
         hasBlackJack = true
+        chips += 5
     } else {
-        message = "You're out of the game!"
+        chips -= 5
+        message = "Bust!"
         isAlive = false
     }
     messageEl.textContent = message
+    chipsEl.textContent = "Chips: $" + chips
 }
 
 
